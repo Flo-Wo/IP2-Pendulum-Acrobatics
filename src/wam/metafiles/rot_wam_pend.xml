@@ -1,0 +1,247 @@
+<mujoco model="wam4">
+
+    <option integrator="Euler" timestep="0.002" gravity="0 0 -9.81" viscosity="0"/>
+    <compiler coordinate="local" angle="radian" inertiagrouprange="2 2" meshdir="meshes/"/>
+    <size njmax="8000" nconmax="4000"/>
+    <!-- eulerseq="XYZ" to match external xyz Euler convention in urdf -->
+    <!-- inertiagrouprange="2 2" to only infer inertia of ball geom. This is necessary to place visual geoms in frames without inertial-->
+
+    <default>
+        <joint type="hinge" limited="true" pos="0 0 0" axis="0 0 1" frictionloss="0.0"/>
+        <site size=".02" rgba="1 0 0 0"/>
+        <default class="col">
+            <geom type="mesh" contype="0" conaffinity="1" group="3" rgba="0.5 0.6 0.7 1" solref="-60000 -400"
+                  density="0" condim="6" friction="0 0 0"/>
+        </default>
+        <default class="viz">
+            <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.7 0.7 0.7 1" density="0"/>
+        </default>
+        <default class="x_axis">
+            <geom contype="0" conaffinity="0" group="5" rgba="1 0 0 1" density="0" type="cylinder" size=".01 0.15"
+                  pos="0.15 0 0" euler="0 1.570796327 0"/>
+        </default>
+        <default class="y_axis">
+            <geom contype="0" conaffinity="0" group="5" rgba="0 1 0 1" density="0" type="cylinder" size=".01 0.15"
+                  pos="0 0.15 0" euler="1.570796327 0 0"/>
+        </default>
+        <default class="z_axis">
+            <geom contype="0" conaffinity="0" group="5" rgba="0 0 1 1" density="0" type="cylinder" size=".01 0.15"
+                  pos="0 0 0.15" euler="0 0 0"/>
+        </default>
+    </default>
+
+    <asset>
+        <mesh file="base_link_fine.stl"/>
+        <mesh file="base_link_convex.stl"/>
+        <mesh file="shoulder_link_fine.stl"/>
+        <mesh file="shoulder_link_convex_decomposition_p1.stl"/>
+        <mesh file="shoulder_link_convex_decomposition_p2.stl"/>
+        <mesh file="shoulder_link_convex_decomposition_p3.stl"/>
+        <mesh file="shoulder_pitch_link_fine.stl"/>
+        <mesh file="shoulder_pitch_link_convex.stl"/>
+        <mesh file="upper_arm_link_fine.stl"/>
+        <mesh file="upper_arm_link_convex_decomposition_p1.stl"/>
+        <mesh file="upper_arm_link_convex_decomposition_p2.stl"/>
+        <mesh file="elbow_link_fine.stl"/>
+        <mesh file="elbow_link_convex.stl"/>
+        <mesh file="pendulum_base.stl"/>
+        <mesh file="pendulum_rotating_x_axis.stl"/>
+        <mesh file="pendulum_pole_mount.stl"/>
+        <mesh file="pendulum_pole.stl"/>
+        <texture name="texplane" type="2d" builtin="checker" rgb1=".2 .3 .4" rgb2=".1 0.15 0.2" width="512" height="512"
+                 mark="cross" markrgb=".8 .8 .8"/>
+        <material name="matplane" reflectance="0.3" texture="texplane" texrepeat="1 1" texuniform="true"/>
+        <texture type="skybox" builtin="gradient" rgb1=".3 .5 .7" rgb2="0 0 0" width="32" height="512"/>
+    </asset>
+
+    <worldbody>
+        <geom class="x_axis"/>
+        <geom class="y_axis"/>
+        <geom class="z_axis"/>
+        <light directional="false" diffuse=".2 .2 .2" specular="0 0 0" pos="0 0 5" dir="0 0 -1" castshadow="false"/>
+        <light mode="targetbodycom" target="wam/links/base" directional="false" diffuse="2 2 2" specular="0.3 0.3 0.3"
+               pos="0 0 4.0" dir="0 0 -1"/>
+
+        <geom name="floor" pos="0 0 0" size="2 2 .25" type="plane" material="matplane" condim="3" solref="-16000 -200"/>
+        <site name="wam/ref_sites/global_origin" pos="0 0 0" size=".01" rgba="0 0 1 1"/>
+
+        <body name="wam/links/base" pos="0 0 1.8" euler="0 0 0">
+            <inertial pos="0.1998 -0.1260 0.2053" mass="9.97059584" diaginertia="0.08709498 0.13911978 0.18350061"
+                      quat="0.67801026 0.64955095 0.27008704 0.21316341"/>
+            <geom class="viz" mesh="base_link_fine" rgba="0.78 0.75 0.7 1" pos="0.22 0.14 0." euler="0 0 0"/>
+            <geom class="col" mesh="base_link_convex" rgba="0.78 0.75 0.7 1" pos="0.22 0.14 0." euler="0 0 0"/>
+
+            <geom class="x_axis"/>
+            <geom class="y_axis"/>
+            <geom class="z_axis"/>
+
+            <body name="wam/frames/0" pos="0.22 0.14 0.346" euler="0 0 0">
+                <geom class="x_axis"/>
+                <geom class="y_axis"/>
+                <geom class="z_axis"/>
+            </body>
+
+            <body name="wam/links/shoulder_yaw" pos="0.22 0.14 0.346" euler="0 0 0">
+                <joint name="wam/joints/shoulder_yaw" pos="0 0 0" range="-2.6 2.6" axis="0 0 1" type="hinge"
+                       armature="0.111266" damping="1.31174" frictionloss="1.70477"/>
+
+                <inertial pos="-0.0044 -0.0007 -0.1219" mass="10.76768767"
+                          diaginertia="0.09044192 0.11309685 0.13508855"
+                          quat="0.5153317  0.48197561 0.53200862 0.46808074"/>
+                <geom class="viz" mesh="shoulder_link_fine" rgba="0.78 0.75 0.7 1"/>
+                <geom class="col" mesh="shoulder_link_convex_decomposition_p1"/>
+                <geom class="col" mesh="shoulder_link_convex_decomposition_p2"/>
+                <geom class="col" mesh="shoulder_link_convex_decomposition_p3"/>
+
+                <body name="wam/frames/1" pos="0. 0. 0." euler="-1.570796 0 0">
+                    <geom class="x_axis"/>
+                    <geom class="y_axis"/>
+                    <geom class="z_axis"/>
+                </body>
+
+                <body name="wam/links/shoulder_pitch" pos="0. 0. 0." euler="-1.570796 0 0">
+                    <joint name="wam/joints/shoulder_pitch" pos="0 0 0" range="-2 2" axis="0 0 1" type="hinge"
+                           armature="0.053249" damping="0.492821" frictionloss="1.43072"/>
+
+                    <inertial pos="-0.0024 -0.0154 0.0311" mass="3.87493756"
+                              diaginertia="0.01264653 0.01671014 0.02142072"
+                              quat="0.69190966  0.18359672 -0.20246001 -0.6682538"/>
+                    <geom class="viz" mesh="shoulder_pitch_link_fine" rgba="0.6 0.6 0.6 1"/>
+                    <geom class="col" mesh="shoulder_pitch_link_convex"/>
+
+                    <body name="wam/frames/2" pos="0. 0. 0." euler="1.570796 0 0">
+                        <geom class="x_axis"/>
+                        <geom class="y_axis"/>
+                        <geom class="z_axis"/>
+                    </body>
+
+                    <body name="wam/links/upper_arm" pos="0 0 0" euler="1.570796 0 0">
+                        <joint name="wam/joints/shoulder_roll" pos="0 0 0" range="-2.8 2.8" axis="0 0 1" type="hinge"
+                               armature="0.0564972" damping="1.48827" frictionloss="0.685072"/>
+
+                        <inertial pos="0.0067 0.0000 0.3425" mass="1.80228141"
+                                  diaginertia="0.00313419 0.05922120 0.05927132"
+                                  quat="0.5201869  -0.45511714 -0.4760385  -0.54374749"/>
+                        <geom class="viz" mesh="upper_arm_link_fine" pos="0 0 0" euler="0 0 0" rgba=".25 .25 .25 1"/>
+                        <geom class="col" mesh="upper_arm_link_convex_decomposition_p1"/>
+                        <geom class="col" mesh="upper_arm_link_convex_decomposition_p2"/>
+
+                        <body name="wam/frames/3" pos="0.045 0 0.55" euler="-1.570796 0 0">
+                            <geom class="x_axis"/>
+                            <geom class="y_axis"/>
+                            <geom class="z_axis"/>
+                        </body>
+
+                        <body name="wam/links/forearm" pos="0.045 0 0.55" euler="-1.570796 0 0">
+                            <joint name="wam/joints/elbow" pos="0 0 0" range="-0.9 3.14159" axis="0 0 1"
+                                   armature="0.0182617" damping="0.150353" frictionloss="0.854358"/>
+
+                            <inertial pos="-0.0340 -0.1405 -0.0000" mass="1.06513649"
+                                      diaginertia="0.00181989 0.01864102 0.01891661"
+                                      quat="0.00315332 0.67227276 0.00368632 0.74028765"/>
+                            <geom class="viz" mesh="elbow_link_fine" rgba="0.85 0.85 0.85 1"/>
+                            <geom class="col" mesh="elbow_link_convex"/>
+                            <geom class="viz" type="cylinder" size=".0445 0.136" pos="-0.045 -0.214 0"
+                                  euler="1.570796 0 0" rgba=".25 .25 .25 1"/>
+                            <geom class="col" type="cylinder" size=".0445 0.136" pos="-0.045 -0.214 0"
+                                  euler="1.570796 0 0"/>
+
+                            <geom class="x_axis"/>
+                            <geom class="y_axis"/>
+                            <geom class="z_axis"/>
+
+                            <body name="wam/frames/4" pos="-0.045 0 0" euler="1.570796 0 0">
+                                <geom class="x_axis"/>
+                                <geom class="y_axis"/>
+                                <geom class="z_axis"/>
+                            </body>
+
+                            <body name="wam/frames/5" pos="-0.045 -0.35 0" euler="1.570796 0 0">
+                                <inertial pos="0 0 0" mass="0.15" diaginertia="0.0000001 0.0000001 0.0000001"/>
+                            </body>
+
+                            <body name="pendulum/links/base" pos="-0.045 -0.35 0" euler="1.570796 0 0">
+                                <inertial pos="3.1584e-07 -7.0909e-05 1.7049e-02" mass="4.2279e-02"
+                                          diaginertia="4.5539e-05 4.5079e-05 1.8135e-05" quat="4.7539e-01 5.2345e-01 4.7539e-01 -5.2345e-01"/>
+                                <geom class="x_axis"/>
+                                <geom class="y_axis"/>
+                                <geom class="z_axis"/>
+                                <geom class="viz" mesh="pendulum_base" rgba="0.85 0.85 0.85 1"/>
+
+                                <body name="pendulum/links/rotating_x_axis" pos="0 0 0.0325" euler="0 0 0">
+                                    <joint name="pendulum/joints/x_axis" pos="0 0 0" limited="true" range="-1.0472 1.0472" axis="1 0 0"
+                                           type="hinge" damping="0.001" frictionloss="0" solreflimit="4e-3 1" solimplimit=".95 .99 1e-3"/>
+                                    <inertial pos="3.1559e-08 3.2056e-05 7.8465e-08" mass="1.7421e-02"
+                                              diaginertia="7.7849e-06 7.4161e-06 6.1774e-07" quat="5.0000e-01 -5.0000e-01 5.0000e-01 5.0000e-01"/>
+
+                                    <geom class="x_axis"/>
+                                    <geom class="y_axis"/>
+                                    <geom class="z_axis"/>
+                                    <geom class="viz" mesh="pendulum_rotating_x_axis" rgba="0.85 0.85 0.85 1"/>
+
+                                    <body name="pendulum/links/pendulum_pole_mount" pos="0 0 0" euler="0 0 0">
+                                        <joint name="pendulum/joints/y_axis" pos="0 0 0" limited="true" range="-1.0472 1.0472" axis="0 1 0"
+                                               type="hinge" damping="0.001" frictionloss="0" solreflimit="4e-3 1" solimplimit=".95 .99 1e-3"/>
+                                        <inertial pos="-2.2766e-05 -6.9707e-05 4.6604e-02" mass="2.3914e-02"
+                                                  diaginertia="3.6422e-05 3.2365e-05 4.7646e-06" quat="-6.1346e-04 4.0042e-04 1.4076e-03 1.0000e+00"/>
+
+                                        <geom class="x_axis"/>
+                                        <geom class="y_axis"/>
+                                        <geom class="z_axis"/>
+                                        <geom class="viz" mesh="pendulum_pole_mount" rgba="0.85 0.85 0.85 1"/>
+
+                                        <body name="pendulum/links/pole" pos="0 0 0.0935" euler="0 0 0">
+                                            <site name="pendulum/sensor_sites/pend_begin" pos="0 0 0" size="0.01" rgba="0 0 1 1" />
+                                            <!-- We will use a steel rod to make the pendulum heavier. Otherwise, the simulation
+                                             can become a bit annoying-->
+                                            <!--<inertial pos="0 0 0.087" mass="0.108" diaginertia="2.7316e-04 2.7316e-04 1.35e-06"/>-->
+                                            <!-- This is the aluminum version -->
+                                            <!-- <inertial pos="-6.5190e-09 -8.1497e-11 8.7000e-02" mass="3.7000e-02"
+                                                      diaginertia="9.3582e-05 9.3582e-05 4.6176e-07"/> -->
+                                            <!-- <geom class="viz" mesh="pendulum_pole" rgba="0.78 0. 0. 1."/> -->
+                                            <!-- <site name="pendulum/sensor_sites/pole_tip" pos="0 0 0.174" size="0.005" rgba="0 0 1 1"/> -->
+                                            <geom type="cylinder" class="viz" fromto="0 0 0 0 0 pendulum_length_full" size="0.005" rgba="0.78 0. 0. 1."/> 
+                                            <inertial pos="0 0 pendulum_length_half" mass="pendulum_mass"
+                                                      diaginertia="pendulum_inertia_tensor_full"/>
+                                            <!--<geom class="viz" mesh="pendulum_pole" rgba="0.78 0. 0. 1."/> -->
+                                            <site name="pendulum/sensor_sites/pole_mass" pos="0 0 pendulum_length_half" size="0.006" rgba="0 1 0 1"/>
+                                            <site name="pendulum/sensor_sites/pole_tip" pos="0 0 pendulum_length_full" size="0.005" rgba="0 0 1 1"/>
+
+                                            <!-- Observers for the optitrack markers -->
+                                            <site name="pendulum/sensor_sites/optitrack_marker_one" pos="0 0 optitrack_marker_one_pos" size="0.0055" rgba="0.75 0.75 0.75 1"/>
+                                            <site name="pendulum/sensor_sites/optitrack_marker_two" pos="0 0 optitrack_marker_two_pos" size="0.0055" rgba="0.75 0.75 0.75 1"/>
+                                            <site name="pendulum/sensor_sites/optitrack_marker_three" pos="0 0 optitrack_marker_three_pos" size="0.0055" rgba="0.75 0.75 0.75 1"/>
+                                            <site name="pendulum/sensor_sites/optitrack_marker_four" pos="0 0 optitrack_marker_four_pos" size="0.0055" rgba="0.75 0.75 0.75 1"/>
+
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+
+    <actuator>
+        <motor name='joint_1' joint='wam/joints/shoulder_yaw' ctrllimited="true" ctrlrange="-22.5 22.5"/>
+        <motor name='joint_2' joint='wam/joints/shoulder_pitch' ctrllimited="true" ctrlrange="-18.75 18.75"/>
+        <motor name='joint_3' joint='wam/joints/shoulder_roll' ctrllimited="true" ctrlrange="-16.0 16.0"/>
+        <motor name='joint_4' joint='wam/joints/elbow' ctrllimited="true" ctrlrange="-19.0 19.0"/>
+        <!-- <motor name='joint_5' joint='pendulum/joints/x_axis'/> -->
+        <!-- <motor name='joint_6' joint='pendulum/joints/y_axis'/> -->
+    </actuator>
+
+    <sensor>
+       <!--Experiment Observations for the evaluation -->
+       <framepos name="pend_tip_world_frame" objtype="site" objname="pendulum/sensor_sites/pole_tip" reftype="site" refname="wam/ref_sites/global_origin"/>
+       <framepos name="pend_half_world_frame" objtype="site" objname="pendulum/sensor_sites/pole_mass" reftype="site" refname="wam/ref_sites/global_origin"/>
+       <framepos name="pend_begin_world_frame" objtype="site" objname="pendulum/sensor_sites/pend_begin" reftype="site" refname="wam/ref_sites/global_origin"/>
+       <!-- Optitrack Observations -->
+       <framepos name="optitrack_marker_one" objtype="site" objname="pendulum/sensor_sites/optitrack_marker_one" reftype="site" refname="wam/ref_sites/global_origin"/>
+       <framepos name="optitrack_marker_two" objtype="site" objname="pendulum/sensor_sites/optitrack_marker_two" reftype="site" refname="wam/ref_sites/global_origin"/>
+       <framepos name="optitrack_marker_three" objtype="site" objname="pendulum/sensor_sites/optitrack_marker_three" reftype="site" refname="wam/ref_sites/global_origin"/>
+       <framepos name="optitrack_marker_four" objtype="site" objname="pendulum/sensor_sites/optitrack_marker_four" reftype="site" refname="wam/ref_sites/global_origin"/>
+    </sensor>
+</mujoco>

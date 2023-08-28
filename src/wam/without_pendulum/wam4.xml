@@ -1,0 +1,169 @@
+<mujoco model="wam4">
+
+    <option integrator="Euler" timestep="0.002" gravity="0 0 -9.81" viscosity="0"/>
+    <compiler coordinate="local" angle="radian" inertiagrouprange="2 2" meshdir="meshes/"/>
+    <size njmax="8000" nconmax="4000"/>
+    <!-- eulerseq="XYZ" to match external xyz Euler convention in urdf -->
+    <!-- inertiagrouprange="2 2" to only infer inertia of ball geom. This is necessary to place visual geoms in frames without inertial-->
+
+    <default>
+        <joint type="hinge" limited="true" pos="0 0 0" axis="0 0 1" frictionloss="0.0"/>
+        <site size=".02" rgba="1 0 0 0"/>
+        <default class="col">
+            <geom type="mesh" contype="0" conaffinity="1" group="3" rgba="0.5 0.6 0.7 1" solref="-60000 -400"
+                  density="0" condim="6" friction="0 0 0"/>
+        </default>
+        <default class="viz">
+            <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.7 0.7 0.7 1" density="0"/>
+        </default>
+        <default class="x_axis">
+            <geom contype="0" conaffinity="0" group="5" rgba="1 0 0 1" density="0" type="cylinder" size=".01 0.15"
+                  pos="0.15 0 0" euler="0 1.570796327 0"/>
+        </default>
+        <default class="y_axis">
+            <geom contype="0" conaffinity="0" group="5" rgba="0 1 0 1" density="0" type="cylinder" size=".01 0.15"
+                  pos="0 0.15 0" euler="1.570796327 0 0"/>
+        </default>
+        <default class="z_axis">
+            <geom contype="0" conaffinity="0" group="5" rgba="0 0 1 1" density="0" type="cylinder" size=".01 0.15"
+                  pos="0 0 0.15" euler="0 0 0"/>
+        </default>
+    </default>
+
+    <asset>
+        <mesh file="base_link_fine.stl"/>
+        <mesh file="base_link_convex.stl"/>
+        <mesh file="shoulder_link_fine.stl"/>
+        <mesh file="shoulder_link_convex_decomposition_p1.stl"/>
+        <mesh file="shoulder_link_convex_decomposition_p2.stl"/>
+        <mesh file="shoulder_link_convex_decomposition_p3.stl"/>
+        <mesh file="shoulder_pitch_link_fine.stl"/>
+        <mesh file="shoulder_pitch_link_convex.stl"/>
+        <mesh file="upper_arm_link_fine.stl"/>
+        <mesh file="upper_arm_link_convex_decomposition_p1.stl"/>
+        <mesh file="upper_arm_link_convex_decomposition_p2.stl"/>
+        <mesh file="elbow_link_fine.stl"/>
+        <mesh file="elbow_link_convex.stl"/>
+        <texture name="texplane" type="2d" builtin="checker" rgb1=".2 .3 .4" rgb2=".1 0.15 0.2" width="512" height="512"
+                 mark="cross" markrgb=".8 .8 .8"/>
+        <material name="matplane" reflectance="0.3" texture="texplane" texrepeat="1 1" texuniform="true"/>
+    </asset>
+
+    <worldbody>
+        <geom class="x_axis"/>
+        <geom class="y_axis"/>
+        <geom class="z_axis"/>
+        <light directional="false" diffuse=".2 .2 .2" specular="0 0 0" pos="0 0 5" dir="0 0 -1" castshadow="false"/>
+        <light mode="targetbodycom" target="wam/links/base" directional="false" diffuse="2 2 2" specular="0.3 0.3 0.3"
+               pos="0 0 4.0" dir="0 0 -1"/>
+
+        <geom name="floor" pos="0 0 0" size="2 2 .25" type="plane" material="matplane" condim="3" solref="-16000 -200"/>
+        <site name="wam/ref_sites/global_origin" pos="0 0 0" size=".01" rgba="0 0 1 1"/>
+
+        <body name="wam/links/base" pos="0 0 1.2" euler="0 0 0">
+            <inertial pos="0.1998 -0.1260 0.2053" mass="9.97059584" diaginertia="0.08709498 0.13911978 0.18350061"
+                      quat="0.67801026 0.64955095 0.27008704 0.21316341"/>
+            <geom class="viz" mesh="base_link_fine" rgba="0.78 0.75 0.7 1" pos="0.22 0.14 0." euler="0 0 0"/>
+            <geom class="col" mesh="base_link_convex" rgba="0.78 0.75 0.7 1" pos="0.22 0.14 0." euler="0 0 0"/>
+
+            <geom class="x_axis"/>
+            <geom class="y_axis"/>
+            <geom class="z_axis"/>
+
+            <body name="wam/frames/0" pos="0.22 0.14 0.346" euler="0 0 0">
+                <geom class="x_axis"/>
+                <geom class="y_axis"/>
+                <geom class="z_axis"/>
+            </body>
+
+            <body name="wam/links/shoulder_yaw" pos="0.22 0.14 0.346" euler="0 0 0">
+                <joint name="wam/joints/shoulder_yaw" pos="0 0 0" axis="0 0 1" range="-2.6 2.6" armature="0.111266" damping="1.31174" frictionloss="1.70477"/>
+
+                <inertial pos="-0.0044 -0.0007 -0.1219" mass="10.76768767"
+                          diaginertia="0.09044192 0.11309685 0.13508855"
+                          quat="0.5153317  0.48197561 0.53200862 0.46808074"/>
+                <geom class="viz" mesh="shoulder_link_fine" rgba="0.78 0.75 0.7 1"/>
+                <geom class="col" mesh="shoulder_link_convex_decomposition_p1"/>
+                <geom class="col" mesh="shoulder_link_convex_decomposition_p2"/>
+                <geom class="col" mesh="shoulder_link_convex_decomposition_p3"/>
+
+                <body name="wam/frames/1" pos="0. 0. 0." euler="-1.570796 0 0">
+                    <geom class="x_axis"/>
+                    <geom class="y_axis"/>
+                    <geom class="z_axis"/>
+                </body>
+
+                <body name="wam/links/shoulder_pitch" pos="0. 0. 0." euler="-1.570796 0 0">
+                    <joint name="wam/joints/shoulder_pitch" pos="0 0 0" axis="0 0 1" range="-2 2" armature="0.053249" damping="0.492821" frictionloss="1.43072"/>
+
+                    <inertial pos="-0.0024 -0.0154 0.0311" mass="3.87493756"
+                              diaginertia="0.01264653 0.01671014 0.02142072"
+                              quat="0.69190966  0.18359672 -0.20246001 -0.6682538"/>
+                    <geom class="viz" mesh="shoulder_pitch_link_fine" rgba="0.6 0.6 0.6 1"/>
+                    <geom class="col" mesh="shoulder_pitch_link_convex"/>
+
+                    <body name="wam/frames/2" pos="0. 0. 0." euler="1.570796 0 0">
+                        <geom class="x_axis"/>
+                        <geom class="y_axis"/>
+                        <geom class="z_axis"/>
+                    </body>
+
+                    <body name="wam/links/upper_arm" pos="0 0 0" euler="1.570796 0 0">
+                        <joint name="wam/joints/shoulder_roll" pos="0 0 0" axis="0 0 1" range="-2.8 2.8" armature="0.0564972" damping="1.48827" frictionloss="0.685072"/>
+
+                        <inertial pos="0.0067 0.0000 0.3425" mass="1.80228141"
+                                  diaginertia="0.00313419 0.05922120 0.05927132"
+                                  quat="0.5201869  -0.45511714 -0.4760385  -0.54374749"/>
+                        <geom class="viz" mesh="upper_arm_link_fine" pos="0 0 0" euler="0 0 0" rgba=".25 .25 .25 1"/>
+                        <geom class="col" mesh="upper_arm_link_convex_decomposition_p1"/>
+                        <geom class="col" mesh="upper_arm_link_convex_decomposition_p2"/>
+
+                        <body name="wam/frames/3" pos="0.045 0 0.55" euler="-1.570796 0 0">
+                            <geom class="x_axis"/>
+                            <geom class="y_axis"/>
+                            <geom class="z_axis"/>
+                        </body>
+
+                        <body name="wam/links/forearm" pos="0.045 0 0.55" euler="-1.570796 0 0">
+                            <joint name="wam/joints/elbow" pos="0 0 0" axis="0 0 1" range="-0.9 3.14159" armature="0.0182617" damping="0.150353" frictionloss="0.854358"/>
+
+                            <inertial pos="-0.0340 -0.1405 -0.0000" mass="1.06513649"
+                                      diaginertia="0.00181989 0.01864102 0.01891661"
+                                      quat="0.00315332 0.67227276 0.00368632 0.74028765"/>
+                            <geom class="viz" mesh="elbow_link_fine" rgba="0.85 0.85 0.85 1"/>
+                            <geom class="col" mesh="elbow_link_convex"/>
+                            <geom class="viz" type="cylinder" size=".0445 0.136" pos="-0.045 -0.214 0"
+                                  euler="1.570796 0 0" rgba=".25 .25 .25 1"/>
+                            <geom class="col" type="cylinder" size=".0445 0.136" pos="-0.045 -0.214 0"
+                                  euler="1.570796 0 0"/>
+
+                            <geom class="x_axis"/>
+                            <geom class="y_axis"/>
+                            <geom class="z_axis"/>
+
+                            <body name="wam/frames/4" pos="-0.045 0 0" euler="1.570796 0 0">
+                                <geom class="x_axis"/>
+                                <geom class="y_axis"/>
+                                <geom class="z_axis"/>
+                            </body>
+
+                            <body name="wam/frames/5" pos="-0.045 -0.35 0" euler="1.570796 0 0">
+                                <inertial pos="0 0 0" mass="0.15" diaginertia="0.0000001 0.0000001 0.0000001"/>
+                                <geom class="x_axis"/>
+                                <geom class="y_axis"/>
+                                <geom class="z_axis"/>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+
+    <actuator>
+        <motor name='joint_1' joint='wam/joints/shoulder_yaw'/>
+        <motor name='joint_2' joint='wam/joints/shoulder_pitch'/>
+        <motor name='joint_3' joint='wam/joints/shoulder_roll'/>
+        <motor name='joint_4' joint='wam/joints/elbow'/>
+    </actuator>
+</mujoco>

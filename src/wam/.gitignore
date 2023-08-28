@@ -1,0 +1,3 @@
+# ignore the temp files created by the helper function
+*_temp.urdf
+*_temp.xml

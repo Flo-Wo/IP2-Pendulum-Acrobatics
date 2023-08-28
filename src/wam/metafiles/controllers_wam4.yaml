@@ -1,0 +1,286 @@
+joint_state_controller: 
+  type: joint_state_controller/JointStateController
+  publish_rate: 500
+
+joint_torque_trajectory_controller_PSpline_PD:
+  type: "robot_controllers/TrajectoryControllerPSplinePD"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p: 200, d: 20}
+    wam4_joint_2: {p: 300, d: 30}
+    wam4_joint_3: {p: 100, d: 10}
+    wam4_joint_4: {p: 100, d: 10}
+
+joint_torque_trajectory_controller_PSpline_PDG:
+  type: "robot_controllers/TrajectoryControllerPSplinePDG"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p: 200, d: 20, model_torque_scale: 1}
+    wam4_joint_2: {p: 300, d: 30, model_torque_scale: 1}
+    wam4_joint_3: {p: 100, d: 10, model_torque_scale: 1}
+    wam4_joint_4: {p: 100, d: 10, model_torque_scale: 1}
+
+joint_torque_trajectory_controller_PSpline_MPDG:
+  type: "robot_controllers/TrajectoryControllerPSplineMPDG"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p: 200, d: 20, model_torque_scale: 1}
+    wam4_joint_2: {p: 300, d: 30, model_torque_scale: 1}
+    wam4_joint_3: {p: 100, d: 10, model_torque_scale: 1}
+    wam4_joint_4: {p: 100, d: 10, model_torque_scale: 1}
+
+joint_torque_trajectory_controller_PSpline_FFIDPD:
+  type: "robot_controllers/TrajectoryControllerPSplineFFIDPD"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p: 200, d: 20, model_torque_scale: 1}
+    wam4_joint_2: {p: 300, d: 30, model_torque_scale: 1}
+    wam4_joint_3: {p: 100, d: 10, model_torque_scale: 1}
+    wam4_joint_4: {p: 100, d: 10, model_torque_scale: 1}
+
+joint_torque_trajectory_controller_PSpline_IDPD:
+  type: "robot_controllers/TrajectoryControllerPSplineIDPD"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p:  200, d: 20, model_torque_scale: 1}
+    wam4_joint_2: {p:  300, d: 30, model_torque_scale: 1}
+    wam4_joint_3: {p:  100, d: 10, model_torque_scale: 1}
+    wam4_joint_4: {p:  100, d: 10, model_torque_scale: 1}
+
+joint_torque_trajectory_controller_PSpline_ID:
+  type: "robot_controllers/TrajectoryControllerPSplineID"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p: 200, d: 20, pe: 1000, de: 25, model_torque_scale: 1.0}
+    wam4_joint_2: {p: 300, d: 30, pe: 1000, de: 25, model_torque_scale: 1.0}
+    wam4_joint_3: {p: 100, d: 10, pe: 1000, de: 25, model_torque_scale: 1.0}
+    wam4_joint_4: {p: 100, d: 10, pe: 1000, de: 25, model_torque_scale: 1.0} 
+
+
+joint_torque_trajectory_controller_PSpline_Luen_Zero:
+  type: "robot_controllers/TrajectoryControllerPSplineLuenZero"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {Lp: 1, Ld: 100}
+    wam4_joint_2: {Lp: 1, Ld: 100}
+    wam4_joint_3: {Lp: 1, Ld: 100}
+    wam4_joint_4: {Lp: 1, Ld: 100}
+
+joint_torque_trajectory_controller_PSpline_Luen_PD:
+  type: "robot_controllers/TrajectoryControllerPSplineLuenPD"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p: 200, d: 0, Lp: 1, Ld: 100}
+    wam4_joint_2: {p: 300, d: 0, Lp: 1, Ld: 100}
+    wam4_joint_3: {p: 100, d: 0, Lp: 1, Ld: 100}
+    wam4_joint_4: {p: 100, d: 0, Lp: 1, Ld: 100}
+
+joint_torque_trajectory_controller_PSpline_Luen_PDG:
+  type: "robot_controllers/TrajectoryControllerPSplineLuenPDG"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p: 200, d: 20, model_torque_scale: 1, Lp: 1, Ld: 100}
+    wam4_joint_2: {p: 300, d: 30, model_torque_scale: 1, Lp: 1, Ld: 100}
+    wam4_joint_3: {p: 100, d: 10, model_torque_scale: 1, Lp: 1, Ld: 100}
+    wam4_joint_4: {p: 100, d: 10, model_torque_scale: 1, Lp: 1, Ld: 100}
+
+joint_torque_trajectory_controller_PSpline_Luen_MPDG:
+  type: "robot_controllers/TrajectoryControllerPSplineLuenMPDG"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p: 200, d: 20, model_torque_scale: 1, Lp: 1, Ld: 100}
+    wam4_joint_2: {p: 300, d: 30, model_torque_scale: 1, Lp: 1, Ld: 100}
+    wam4_joint_3: {p: 100, d: 10, model_torque_scale: 1, Lp: 1, Ld: 100}
+    wam4_joint_4: {p: 100, d: 10, model_torque_scale: 1, Lp: 1, Ld: 100}
+
+joint_torque_trajectory_controller_PSpline_Luen_FFIDPD:
+  type: "robot_controllers/TrajectoryControllerPSplineLuenFFIDPD"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p: 200, d: 20, model_torque_scale: 1, Lp: 1, Ld: 100}
+    wam4_joint_2: {p: 300, d: 30, model_torque_scale: 1, Lp: 1, Ld: 100}
+    wam4_joint_3: {p: 100, d: 10, model_torque_scale: 1, Lp: 1, Ld: 100}
+    wam4_joint_4: {p: 100, d: 10, model_torque_scale: 1, Lp: 1, Ld: 100}
+
+joint_torque_trajectory_controller_PSpline_Luen_IDPD:
+  type: "robot_controllers/TrajectoryControllerPSplineLuenIDPD"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p:  200, d: 20, model_torque_scale: 1, Lp: 1, Ld: 100}
+    wam4_joint_2: {p:  300, d: 30, model_torque_scale: 1, Lp: 1, Ld: 100}
+    wam4_joint_3: {p:  100, d: 10, model_torque_scale: 1, Lp: 1, Ld: 100}
+    wam4_joint_4: {p:  100, d: 10, model_torque_scale: 1, Lp: 1, Ld: 100}
+
+joint_torque_trajectory_controller_PSpline_Luen_ID:
+  type: "robot_controllers/TrajectoryControllerPSplineLuenID"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p: 200, d: 20, pe: 1000, de: 25, model_torque_scale: 1.0, Lp: 1, Ld: 100}
+    wam4_joint_2: {p: 300, d: 30, pe: 1000, de: 25, model_torque_scale: 1.0, Lp: 1, Ld: 100}
+    wam4_joint_3: {p: 100, d: 10, pe: 1000, de: 25, model_torque_scale: 1.0, Lp: 1, Ld: 100}
+    wam4_joint_4: {p: 100, d: 10, pe: 1000, de: 25, model_torque_scale: 1.0, Lp: 1, Ld: 100} 
+
+
+joint_torque_trajectory_controller_PSpline_ExtLuen_Zero:
+  type: "robot_controllers/TrajectoryControllerPSplineExtLuenZero"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_2: {Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_3: {Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_4: {Lp: 1, Ld: 50, Li: 7000}
+
+joint_torque_trajectory_controller_PSpline_ExtLuen_PD:
+  type: "robot_controllers/TrajectoryControllerPSplineExtLuenPD"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p: 200, d: 20, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_2: {p: 300, d: 30, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_3: {p: 100, d: 10, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_4: {p: 100, d: 10, Lp: 1, Ld: 50, Li: 7000}
+
+joint_torque_trajectory_controller_PSpline_ExtLuen_PDG:
+  type: "robot_controllers/TrajectoryControllerPSplineExtLuenPDG"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p: 200, d: 20, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_2: {p: 300, d: 30, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_3: {p: 100, d: 10, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_4: {p: 100, d: 10, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+
+joint_torque_trajectory_controller_PSpline_ExtLuen_MPDG:
+  type: "robot_controllers/TrajectoryControllerPSplineExtLuenMPDG"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p: 200, d: 20, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_2: {p: 300, d: 30, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_3: {p: 100, d: 10, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_4: {p: 100, d: 10, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+
+joint_torque_trajectory_controller_PSpline_ExtLuen_FFIDPD:
+  type: "robot_controllers/TrajectoryControllerPSplineLuenFFIDPD"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p: 200, d: 20, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_2: {p: 300, d: 30, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_3: {p: 100, d: 10, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_4: {p: 100, d: 10, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+
+joint_torque_trajectory_controller_PSpline_ExtLuen_IDPD:
+  type: "robot_controllers/TrajectoryControllerPSplineExtLuenIDPD"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p:  200, d: 40, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_2: {p:  300, d: 60, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_3: {p:  100, d: 20, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_4: {p:  100, d: 15, model_torque_scale: 1, Lp: 1, Ld: 50, Li: 7000}
+
+joint_torque_trajectory_controller_PSpline_ExtLuen_ID:
+  type: "robot_controllers/TrajectoryControllerPSplineExtLuenID"
+  joints:
+    - wam4_joint_1
+    - wam4_joint_2
+    - wam4_joint_3
+    - wam4_joint_4
+
+  gains:
+    wam4_joint_1: {p: 200, d: 20, pe: 1400, de: 100, model_torque_scale: 1.0, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_2: {p: 300, d: 30, pe: 1300, de: 100, model_torque_scale: 1.0, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_3: {p: 100, d: 10, pe: 1300, de: 100, model_torque_scale: 1.0, Lp: 1, Ld: 50, Li: 7000}
+    wam4_joint_4: {p: 100, d: 10, pe: 1400, de: 100, model_torque_scale: 1.0, Lp: 1, Ld: 50, Li: 7000} 
+

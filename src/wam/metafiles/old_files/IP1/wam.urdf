@@ -1,0 +1,215 @@
+<?xml version="1.0" ?>
+
+<!-- ========================================================================================
+ |  URDF description of the 4 DoF Barrett WAM according to                                  |
+ |  https://web.barrett.com/support/WAM_Documentation/WAM_InertialSpecifications_AC-02.pdf  |
+ |                                                                                          |
+ |  Kai Ploeger - mail@kaiploeger.net                                                       |
+ |  Jan 5th 2022                                                                            |
+ ========================================================================================= -->
+
+
+<robot name="wam_4dof">
+
+    <link name="links/world"/>
+
+
+    <link name="links/base">
+        <inertial>
+            <mass value="9.97059584"/>
+            <origin xyz="-0.02017671 -0.26604706 -0.14071720"/>
+            <inertia ixx="1.01232865" ixy="0.05992441" ixz="0.05388736" iyy="0.38443311" iyz="0.37488748" izz="0.82739198"/>
+        </inertial>
+        <!--<visual>-->
+            <!--<origin rpy="0 0 -1.5707963267948966" xyz="0 0 0"/>-->
+            <!--<geometry name="wam_base_visual">-->
+                <!--<mesh filename="../meshes/base_link_fine.obj"/>-->
+            <!--</geometry>-->
+        <!--</visual>-->
+        <!--<collision>-->
+            <!--<origin rpy="0 0 -1.5707963267948966" xyz="0 0 0"/>-->
+            <!--<geometry name="wam_base_collision">-->
+                <!--<mesh filename="../meshes/base_link_convex.obj"/>-->
+            <!--</geometry>-->
+            <!--<contact_coefficients kd="1000.0" kp="1000.0" mu="0"/>-->
+        <!--</collision>-->
+    </link>
+  
+
+    <link name="links/shoulder_yaw">
+        <inertial>
+            <mass value="10.76768767"/>
+            <origin xyz="-0.00443422 0.12189039 -0.00066489"/>
+            <inertia ixx="0.29486350" ixy="-0.00795023" ixz="-0.00009311" iyy="0.11350017" iyz="0.00018711" izz="0.25065343"/>
+        </inertial>
+        <!--<visual>-->
+            <!--<origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>-->
+            <!--<geometry name="link_j1_visual">-->
+                <!--<mesh filename="../meshes/shoulder_link_fine.obj"/>-->
+            <!--</geometry>-->
+        <!--</visual>-->
+        <!--<collision>-->
+            <!--<origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>-->
+            <!--<geometry name="link_j1_collision">-->
+                <!--<mesh filename="../meshes/shoulder_link_convex_decomposition_p1.obj"/>-->
+            <!--</geometry>-->
+            <!--<contact_coefficients kd="1000.0" kp="1000.0" mu="0"/>-->
+        <!--</collision>-->
+        <!--<collision>-->
+            <!--<origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>-->
+            <!--<geometry name="link_j1_collision">-->
+                <!--<mesh filename="../meshes/shoulder_link_convex_decomposition_p2.obj"/>-->
+            <!--</geometry>-->
+            <!--<contact_coefficients kd="1000.0" kp="1000.0" mu="0"/>-->
+        <!--</collision>-->
+        <!--<collision>-->
+            <!--<origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>-->
+            <!--<geometry name="link_j1_collision">-->
+                <!--<mesh filename="../meshes/shoulder_link_convex_decomposition_p3.obj"/>-->
+            <!--</geometry>-->
+            <!--<contact_coefficients kd="1000.0" kp="1000.0" mu="0"/>-->
+        <!--</collision>-->
+    </link>
+  
+
+    <link name="links/shoulder_pitch">
+        <inertial>
+            <mass value="3.87493756"/>
+            <origin xyz="-0.00236983 0.03105614 0.01542114"/>
+            <inertia ixx="0.02606840" ixy="-0.00001346" ixz="-0.00011701" iyy="0.01472202" iyz="0.00003659" izz="0.01934814"/>
+        </inertial>
+        <!--<visual>-->
+            <!--<origin rpy="0 0 0" xyz="0 0 0"/>-->
+            <!--<geometry name="link_j2_visual">-->
+                <!--<mesh filename="../meshes/shoulder_pitch_link_fine.obj"/>-->
+            <!--</geometry>-->
+        <!--</visual>-->
+        <!--<collision>-->
+            <!--<origin rpy="0 0 0" xyz="0 0 0"/>-->
+            <!--<geometry name="link_j2_collision">-->
+                <!--<mesh filename="../meshes/shoulder_pitch_link_convex.obj"/>-->
+            <!--</geometry>-->
+            <!--<contact_coefficients kd="1000.0" kp="1000.0" mu="0"/>-->
+        <!--</collision>-->
+    </link>
+
+  
+    <link name="links/upper_arm">
+        <inertial>
+            <mass value="1.80228141"/>
+            <origin xyz="-0.03825858 0.20750770 0.00003309"/>
+            <inertia ixx="0.13671601" ixy="-0.01680434" ixz="0.00000510" iyy="0.00588354" iyz="-0.00000530" izz="0.13951371"/>
+        </inertial>
+        <!--<visual>-->
+            <!--<origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>-->
+            <!--<geometry name="link_j3_visual">-->
+                <!--<mesh filename="../meshes/upper_arm_link_fine.obj"/>-->
+            <!--</geometry>-->
+        <!--</visual>-->
+        <!--<collision>-->
+            <!--<origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>-->
+            <!--<geometry name="link_j3_collision">-->
+                <!--<mesh filename="../meshes/upper_arm_link_convex_decomposition_p1.obj"/>-->
+            <!--</geometry>-->
+            <!--<contact_coefficients kd="1000.0" kp="1000.0" mu="0"/>-->
+        <!--</collision>-->
+        <!--<collision>-->
+            <!--<origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>-->
+            <!--<geometry name="link_j3_collision">-->
+                <!--<mesh filename="../meshes/upper_arm_link_convex_decomposition_p2.obj"/>-->
+            <!--</geometry>-->
+            <!--<contact_coefficients kd="1000.0" kp="1000.0" mu="0"/>-->
+        <!--</collision>-->
+    </link>
+  
+
+    <link name="links/forearm">
+        <inertial>
+            <mass value="1.06513649"/>
+            <origin xyz="0.01095471 -0.00002567 0.14053900"/>
+            <inertia ixx="0.03952350" ixy="0.00000189" ixz="0.00003117" iyy="0.04008214" iyz="0.00000131" izz="0.00210299"/>
+        </inertial>
+        <!--<visual>-->
+            <!--<origin rpy="1.5707963267948966 3.141592653589793 3.141592653589793" xyz="0 0 0"/>-->
+            <!--<geometry>-->
+                <!--<mesh filename="../meshes/elbow_link_fine.obj"/>-->
+            <!--</geometry>-->
+        <!--</visual>-->
+        <!--<visual>-->
+            <!--<origin rpy="3.141592653589793 0 0" xyz="-.045 0 0.214"/>-->
+            <!--<geometry>-->
+                <!--<cylinder length="0.272" radius=".0445"/>-->
+            <!--</geometry>-->
+        <!--</visual>-->
+        <!--<collision>-->
+            <!--<origin rpy="1.5707963267948966 3.141592653589793 3.141592653589793" xyz="0 0 0"/>-->
+            <!--<geometry>-->
+                <!--<mesh filename="../meshes/elbow_link_convex.obj"/>-->
+            <!--</geometry>-->
+            <!--<contact_coefficients kd="1000.0" kp="1000.0" mu="0"/>-->
+        <!--</collision>-->
+        <!--<collision>-->
+            <!--<origin rpy="3.141592653589793 0 0" xyz="-.045 0 0.214"/>-->
+            <!--<geometry>-->
+                <!--<cylinder length="0.272" radius=".0445"/>-->
+            <!--</geometry>-->
+            <!--<contact_coefficients kd="1000.0" kp="1000.0" mu="0"/>-->
+        <!--</collision>-->
+    </link>
+
+    <link name="links/endeffector" />
+  
+    <joint name="joints/base" type="fixed">
+        <parent link="links/world"/>
+        <child link="links/base"/>
+        <!--<origin rpy="-1.570796327948966 0 3.141592653589793" xyz="0 -0.0075 1.2"/>-->
+        <origin rpy="0 0 0" xyz="0 -0.0075 1.2"/>
+    </joint>
+
+
+    <joint name="joints/shoulder_yaw" type="revolute">
+        <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0.346"/>
+        <parent link="links/base"/>
+        <child link="links/shoulder_yaw"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="1500" lower="-2.6" upper="2.6" velocity="200"/>
+        <dynamics damping="0"/>
+    </joint>
+
+
+    <joint name="joints/shoulder_pitch" type="revolute">
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <parent link="links/shoulder_yaw"/>
+        <child link="links/shoulder_pitch"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1250" lower="-2.0" upper="2.0" velocity="200"/>
+        <dynamics damping="0"/>
+    </joint>
+
+
+    <joint name="joints/shoulder_roll" type="revolute">
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <parent link="links/shoulder_pitch"/>
+        <child link="links/upper_arm"/>
+        <axis xyz="0 -1 0"/>
+        <limit effort="400" lower="-2.8" upper="2.8" velocity="200"/>
+        <dynamics damping="0"/>
+    </joint>
+
+
+    <joint name="joints/elbow" type="revolute">
+        <origin rpy="1.5707963267948966 0 0" xyz="0.045 -0.55 0"/>
+        <parent link="links/upper_arm"/>
+        <child link="links/forearm"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="600" lower="-0.9" upper="3.14159" velocity="200"/>
+        <dynamics damping="0"/>
+    </joint>
+
+    <joint name="joints/endeffector" type="fixed">
+        <origin rpy="0 0 0" xyz="-0.045 0 0.35" />
+        <parent link="links/forearm"/>
+        <child link="links/endeffector"/>
+    </joint>
+
+</robot>

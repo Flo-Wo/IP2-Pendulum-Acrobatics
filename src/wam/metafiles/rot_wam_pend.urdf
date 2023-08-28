@@ -1,0 +1,493 @@
+<?xml version="1.0" ?>
+
+<robot name="wam_4dof">
+
+    <material name="dark_red">
+        <color rgba="0.78 0. 0. 1."/>
+    </material>
+
+    <material name="black">
+        <color rgba="0.05 0.05 0.05 1"/>
+    </material>
+
+    <material name="red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
+    <material name="green">
+        <color rgba="0 1 0 1"/>
+    </material>
+
+    <material name="blue">
+        <color rgba="0 0 1 1"/>
+    </material>
+
+    <material name="dark">
+        <color rgba=".25 .25 .25 1"/>
+    </material>
+
+    <material name="lightest_grey">
+        <color rgba="0.85 0.85 0.85 1"/>
+    </material>
+
+    <material name="light_grey">
+        <color rgba="0.78 0.75 0.7 1"/>
+    </material>
+
+    <material name="dark_grey">
+        <color rgba="0.6 0.6 0.6 1"/>
+    </material>
+
+    <link name="links/world"/>
+
+    <link name="links/base">
+        <inertial>
+            <mass value="9.97059584"/>
+            <origin xyz="0.1998 -0.1260 0.2053" rpy="1.5605 0.0894 0.6977"/>
+            <inertia ixx="0.08709498" ixy="0." ixz="0." iyy="0.13911978" iyz="0." izz="0.18350061"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.22 0.14 0." rpy="0 0 0"/>
+            <geometry name="wam_base_visual">
+                <mesh filename="base_link_fine.stl"/>
+            </geometry>
+            <material name="light_grey"/>
+        </visual>
+        <collision>
+            <origin xyz="0.22 0.14 0.346" rpy="0 0 0"/>
+            <geometry name="wam_base_collision">
+                <mesh filename="base_link_convex.stl"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="frames/0">
+        <visual>
+            <origin xyz="0.075 0 0" rpy="0 1.570796327 0"/>
+            <geometry name="x_axis">
+                <cylinder length="0.15" radius="0.01"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+        <visual>
+            <origin xyz="0 0.075 0" rpy="1.570796327 0 0"/>
+            <geometry name="y_axis">
+                <cylinder length="0.15" radius="0.01"/>
+            </geometry>
+            <material name="green"/>
+        </visual>
+        <visual>
+            <origin xyz="0 0 0.075" rpy="0 0 0"/>
+            <geometry name="z_axis">
+                <cylinder length="0.15" radius="0.01"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <link name="links/shoulder_yaw">
+        <inertial>
+            <mass value="10.76768767"/>
+            <origin xyz="-0.0044 -0.0007 -0.1219" rpy="1.6016 0.0973 1.5751"/>
+            <inertia ixx="0.09044192" ixy="0." ixz="0." iyy="0.11309685" iyz="0." izz="0.13508855"/>
+        </inertial>
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry name="link_shoulder_yaw_visual">
+                <mesh filename="shoulder_link_fine.stl"/>
+            </geometry>
+            <material name="light_grey"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry name="link_shoulder_yaw_collision1">
+                <mesh filename="shoulder_link_convex_decomposition_p1.stl"/>
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry name="link_shoulder_yaw_collision2">
+                <mesh filename="shoulder_link_convex_decomposition_p2.stl"/>
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry name="link_shoulder_yaw_collision3">
+                <mesh filename="shoulder_link_convex_decomposition_p3.stl"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="frames/1">
+        <visual>
+            <origin xyz="0.075 0 0" rpy="0 1.570796327 0"/>
+            <geometry name="x_axis">
+                <cylinder length="0.15" radius="0.01"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+        <visual>
+            <origin xyz="0 0.075 0" rpy="1.570796327 0 0"/>
+            <geometry name="y_axis">
+                <cylinder length="0.15" radius="0.01"/>
+            </geometry>
+            <material name="green"/>
+        </visual>
+        <visual>
+            <origin xyz="0 0 0.075" rpy="0 0 0"/>
+            <geometry name="z_axis">
+                <cylinder length="0.15" radius="0.01"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <link name="links/shoulder_pitch">
+        <inertial>
+            <mass value="3.87493756"/>
+            <origin xyz="-0.0024 -0.0154 0.0311" rpy="0.5527 -0.0348 -1.5459"/>
+            <inertia ixx="0.01264653" ixy="0." ixz="0." iyy="0.01671014" iyz="0." izz="0.02142072"/>
+        </inertial>
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry name="link_shoulder_pitch_visual">
+                <mesh filename="shoulder_pitch_link_fine.stl"/>
+            </geometry>
+            <material name="dark_grey"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry name="link_shoulder_pitch_collision">
+                <mesh filename="shoulder_pitch_link_convex.stl"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="frames/2">
+        <visual>
+            <origin xyz="0.075 0 0" rpy="0 1.570796327 0"/>
+            <geometry name="x_axis">
+                <cylinder length="0.15" radius="0.01"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+        <visual>
+            <origin xyz="0 0.075 0" rpy="1.570796327 0 0"/>
+            <geometry name="y_axis">
+                <cylinder length="0.15" radius="0.01"/>
+            </geometry>
+            <material name="green"/>
+        </visual>
+        <visual>
+            <origin xyz="0 0 0.075" rpy="0 0 0"/>
+            <geometry name="z_axis">
+                <cylinder length="0.15" radius="0.01"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <link name="links/upper_arm">
+        <inertial>
+            <mass value="1.80228141"/>
+            <origin xyz="0.0067 0.0000 0.3425" rpy="0.3219 -1.4307 -1.8954"/>
+            <inertia ixx="0.00313419" ixy="0." ixz="0." iyy="0.05922120" iyz="0." izz="0.05927132"/>
+        </inertial>
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry name="link_upper_arm_visual">
+                <mesh filename="upper_arm_link_fine.stl"/>
+            </geometry>
+            <material name="dark"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry name="link_upper_arm_collision1">
+                <mesh filename="upper_arm_link_convex_decomposition_p1.stl"/>
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry name="link_upper_arm_collision1">
+                <mesh filename="upper_arm_link_convex_decomposition_p2.stl"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="frames/3">
+        <visual>
+            <origin xyz="0.075 0 0" rpy="0 1.570796327 0"/>
+            <geometry name="x_axis">
+                <cylinder length="0.15" radius="0.01"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+        <visual>
+            <origin xyz="0 0.075 0" rpy="1.570796327 0 0"/>
+            <geometry name="y_axis">
+                <cylinder length="0.15" radius="0.01"/>
+            </geometry>
+            <material name="green"/>
+        </visual>
+        <visual>
+            <origin xyz="0 0 0.075" rpy="0 0 0"/>
+            <geometry name="z_axis">
+                <cylinder length="0.15" radius="0.01"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <link name="links/forearm">
+        <inertial>
+            <mass value="1.06513649"/>
+            <origin xyz="-0.0340 -0.1405 -0.0000" rpy="0.1006 -1.4741 3.0417"/>
+            <inertia ixx="0.00181989" ixy="0." ixz="0." iyy="0.01864102" iyz="0." izz="0.01891661"/>
+        </inertial>
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry name="link_forearm_visual1">
+                <mesh filename="elbow_link_fine.stl"/>
+            </geometry>
+            <material name="lightest_grey"/>
+        </visual>
+        <visual>
+            <origin rpy="1.570796 0 0" xyz="-0.045 -0.214 0"/>
+            <geometry name="link_forearm_visual2">
+                <cylinder radius=".0445" length="0.272"/>
+            </geometry>
+            <material name="dark"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry name="link_forearm_collision1">
+                <mesh filename="elbow_link_convex.stl"/>
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="1.570796 0 0" xyz="-0.045 -0.214 0"/>
+            <geometry name="link_forearm_collision2">
+                <cylinder radius=".0445" length="0.136"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="frames/4">
+        <visual>
+            <origin xyz="0.075 0 0" rpy="0 1.570796327 0"/>
+            <geometry name="x_axis">
+                <cylinder length="0.15" radius="0.01"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+        <visual>
+            <origin xyz="0 0.075 0" rpy="1.570796327 0 0"/>
+            <geometry name="y_axis">
+                <cylinder length="0.15" radius="0.01"/>
+            </geometry>
+            <material name="green"/>
+        </visual>
+        <visual>
+            <origin xyz="0 0 0.075" rpy="0 0 0"/>
+            <geometry name="z_axis">
+                <cylinder length="0.15" radius="0.01"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <link name="frames/5">
+        <inertial>
+            <mass value="0.15"/>
+            <origin xyz="0 0 0"/>
+            <inertia ixx="0.0000001" ixy="0." ixz="0." iyy="0.0000001" iyz="0." izz="0.0000001"/>
+        </inertial>
+    </link>
+
+    <link name="links/pendulum/base">
+        <inertial>
+            <mass value="4.2279e-02"/>
+            <origin xyz="3.1584e-07 -7.0909e-05 1.7049e-02" rpy="1.6670e+00 1.5708e+00 0.0000e+00"/>
+            <inertia ixx="4.5539e-05" ixy="0." ixz="0." iyy="4.5079e-05" iyz="0." izz="1.8135e-05"/>
+        </inertial>
+        <visual>
+            <origin xyz="0. 0. 0." rpy="0 0 0"/>
+            <geometry name="pendulum_base_visual">
+                <mesh filename="pendulum_base.stl"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+
+    <link name="links/pendulum/rotating_x_axis">
+        <inertial>
+            <mass value="1.7421e-02"/>
+            <origin xyz="3.1559e-08 3.2056e-05 7.8465e-08" rpy="-1.5708e+00 1.5708e+00 0.0000e+00"/>
+            <inertia ixx="7.7849e-06" ixy="0." ixz="0." iyy="7.4161e-06" iyz="0." izz="6.1774e-07"/>
+        </inertial>
+        <visual>
+            <origin xyz="0. 0. 0." rpy="0 0 0"/>
+            <geometry name="pendulum_rotating_x_axis_visual">
+                <mesh filename="pendulum_rotating_x_axis.stl"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+
+    <link name="links/pendulum/pole_mount">
+        <inertial>
+            <mass value="2.3914e-02"/>
+            <origin xyz="-2.2766e-05 -6.9707e-05 4.6604e-02" rpy="2.8147e-03 -8.0257e-04 -3.1404e+00"/>
+            <inertia ixx="3.6422e-05" ixy="0." ixz="0." iyy="3.2365e-05" iyz="0." izz="4.7646e-06"/>
+        </inertial>
+        <visual>
+            <origin xyz="0. 0. 0." rpy="0 0 0"/>
+            <geometry name="pendulum_pole_mount_visual">
+                <mesh filename="pendulum_pole_mount.stl"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+
+    <link name="links/pendulum/pole">
+        <inertial>
+            <mass value="pendulum_mass"/>
+            <origin xyz="0 0 pendulum_length_half" rpy="0.0000e+00 0.0000e+00 0.0000e+00"/>
+            <inertia ixx="pendulum_inertia_tensor_xx" ixy="0." ixz="0." iyy="pendulum_inertia_tensor_yy"
+                iyz="0." izz="pendulum_inertia_tensor_zz"/>
+        </inertial>
+        <collision>
+            <!-- offset needed as the origin of the cylinder is it's center -->
+            <origin rpy="0 0 0" xyz="0 0 pendulum_length_half"/>
+            <geometry>
+                <cylinder length="pendulum_length_full" radius="0.005"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0. 0. pendulum_length_half" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="pendulum_length_full" radius="0.005"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+    </link>
+
+    <link name="links/pendulum/pole_tip"/>
+
+    <!-- JOINTS -->
+
+    <joint name="transformations/base" type="fixed">
+        <parent link="links/world"/>
+        <child link="links/base"/>
+        <origin xyz="0 0 1.8" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="transformations/frames/0" type="fixed">
+        <origin xyz="0.22 0.14 0.346" rpy="0 0 0"/>
+        <parent link="links/base"/>
+        <child link="frames/0"/>
+    </joint>
+
+    <joint name="joints/shoulder_yaw" type="revolute">
+        <origin xyz="0.22 0.14 0.346" rpy="0 0 0"/>
+        <parent link="links/base"/>
+        <child link="links/shoulder_yaw"/>
+        <axis xyz="0 0 1"/>
+        <dynamics damping="1.31174" friction="1.70477"/>
+        <limit effort="22.5" lower="-2.6" upper="2.6" velocity="200"/>
+    </joint>
+
+    <joint name="transformations/frames/1" type="fixed">
+        <origin xyz="0. 0. 0." rpy="-1.570796 0 0"/>
+        <parent link="links/shoulder_yaw"/>
+        <child link="frames/1"/>
+    </joint>
+
+    <joint name="joints/shoulder_pitch" type="revolute">
+        <origin xyz="0 0 0" rpy="-1.570796 0 0"/>
+        <parent link="links/shoulder_yaw"/>
+        <child link="links/shoulder_pitch"/>
+        <axis xyz="0 0 1"/>
+        <dynamics damping="0.492821" friction="1.43072"/>
+        <limit effort="18.75" lower="-2.0" upper="2.0" velocity="200"/>
+    </joint>
+
+    <joint name="transformations/frames/2" type="fixed">
+        <origin xyz="0. 0. 0." rpy="1.570796 0 0"/>
+        <parent link="links/shoulder_pitch"/>
+        <child link="frames/2"/>
+    </joint>
+
+    <joint name="joints/shoulder_roll" type="revolute">
+        <origin xyz="0 0 0" rpy="1.570796 0 0"/>
+        <parent link="links/shoulder_pitch"/>
+        <child link="links/upper_arm"/>
+        <axis xyz="0 0 1"/>
+        <dynamics damping="1.48827" friction="0.685072"/>
+        <limit effort="16.0" lower="-2.8" upper="2.8" velocity="200"/>
+    </joint>
+
+    <joint name="transformations/frames/3" type="fixed">
+        <origin rpy="-1.570796 0. 0." xyz="0.045 0 0.55"/>
+        <parent link="links/upper_arm"/>
+        <child link="frames/3"/>
+    </joint>
+
+    <joint name="joints/elbow" type="revolute">
+        <origin rpy="-1.570796 0 0" xyz="0.045 0 0.55"/>
+        <parent link="links/upper_arm"/>
+        <child link="links/forearm"/>
+        <axis xyz="0 0 1"/>
+        <dynamics damping="0.150353" friction="0.854358"/>
+        <limit effort="19.0" lower="-0.9" upper="3.14159" velocity="200"/>
+    </joint>
+
+    <joint name="transformations/frames/4" type="fixed">
+        <origin rpy="1.570796 0. 0." xyz="-0.045 0 0"/>
+        <parent link="links/forearm"/>
+        <child link="frames/4"/>
+    </joint>
+
+    <joint name="transformations/frames/5" type="fixed">
+        <origin rpy="1.570796 0. 0." xyz="-0.045 -0.35 0"/>
+        <parent link="links/forearm"/>
+        <child link="frames/5"/>
+    </joint>
+
+    <joint name="transformations/pendulum/base" type="fixed">
+        <parent link="links/forearm"/>
+        <child link="links/pendulum/base"/>
+        <origin xyz="-0.045 -0.35 0" rpy="1.570796 0 0"/>
+    </joint>
+
+    <joint name="transformations/pendulum/x_axis" type="revolute">
+        <origin xyz="0 0 0.0325" rpy="0 0 0"/>
+        <parent link="links/pendulum/base"/>
+        <child link="links/pendulum/rotating_x_axis"/>
+        <axis xyz="1 0 0"/>
+        <dynamics damping="0.001" friction="0"/>
+        <limit effort="0" lower="-1.0472" upper="1.0472" velocity="200"/>
+    </joint>
+
+    <joint name="transformations/pendulum/y_axis" type="revolute">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="links/pendulum/rotating_x_axis"/>
+        <child link="links/pendulum/pole_mount"/>
+        <axis xyz="0 1 0"/>
+        <dynamics damping="0.001" friction="0"/>
+        <limit effort="0" lower="-1.0472" upper="1.0472" velocity="200"/>
+    </joint>
+
+    <joint name="transformations/pendulum/pole" type="fixed">
+        <parent link="links/pendulum/pole_mount"/>
+        <child link="links/pendulum/pole"/>
+        <origin xyz="0 0 0.0935" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="transformations/pendulum/pole_tip" type="fixed">
+        <parent link="links/pendulum/pole"/>
+        <child link="links/pendulum/pole_tip"/>
+        <origin xyz="0 0 pendulum_length_full" rpy="0 0 0"/>
+    </joint>
+
+</robot>
